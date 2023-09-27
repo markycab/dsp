@@ -1,0 +1,46 @@
+%USMAN, JUBAL U.
+n = 0:100;
+x = cos(pi * n / 2);
+
+k = -100:100;
+w = (pi / 100) * k; % Frequency between -pi and +pi
+
+X = x * (exp(-1j * pi / 100)).^(n' * k); % DTFT of x
+
+% Signal multiplied by exp(j*pi*n/4)
+y = exp(1j * pi * n / 4) .* x;
+
+Y = y * (exp(-1j * pi / 100)).^(n' * k); % DTFT of y
+
+% Graphical verification
+subplot(2, 2, 1);
+plot(w/pi, abs(X));
+grid on;
+axis([-1, 1, 0, 60]);
+xlabel('Frequency in pi units');
+ylabel('|X|');
+title('Magnitude of X');
+
+subplot(2, 2, 2);
+plot(w/pi, angle(X)/pi);
+grid on;
+axis([-1, 1, -1, 1]);
+xlabel('Frequency in pi units');
+ylabel('Radians/pi');
+title('Angle of X');
+
+subplot(2, 2, 3);
+plot(w/pi, abs(Y));
+grid on;
+axis([-1, 1, 0, 60]);
+xlabel('Frequency in pi units');
+ylabel('|Y|');
+title('Magnitude of Y');
+
+subplot(2, 2, 4);
+plot(w/pi, angle(Y)/pi);
+grid on;
+axis([-1, 1, -1, 1]);
+xlabel('Frequency in pi units');
+ylabel('Radians/pi');
+title('Angle of Y');
