@@ -1,14 +1,14 @@
-function [Xk]=dft (xn, n, N)
-% Computes Discrete Fourier Transform
-% [Xk] = dft(xn,n,N)
-%   Xk = DFT coefficient array over 0<=k<=N-1
-%   xn = N-point finite duration sequence
-%   N = length of DFT
-
-
-Xk = zeros(1,length(N));
-for i = 1:N
-    X = xn.*exp(-1i*2*pi/N*(i-1)*n);
-    Xk(i)=sum(X);
-end
-end
+function [Xk] = dft(xn, N)
+% Computes Discrete Fourier Series Coefficients
+% -------------------------------------------------
+% [Xk] = dfs(xn, N)
+% Xk = DFS coeff. array over 0 <= k <= N-1
+% xn = One period of periodic signal over 0 <= n <= N-1
+% N = Fundamental period of xn
+%
+n = 0:1:N-1;                % row vector for n
+k = 0:1:N-1;                % row vecor for k
+WN = exp(-1i*2*pi/N);       % Wn factor(e^-j*(2\pi)/N)
+nk = n'*k;                  % creates a N by N matrix of nk values
+WNnk = WN .^ nk;            % DFS matrix
+Xk = xn * WNnk;             % row vector for DFS coefficients
