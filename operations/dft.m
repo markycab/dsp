@@ -8,7 +8,7 @@ function [Xk]=dft (xn, n, N)
 
 Xk = zeros(1,length(N));
 for i = 1:N
-    X = xn.*exp(-j*2*pi/N*(i-1)*n);
+    X = xn.*exp(-1i*2*pi/N*(i-1)*n);
     Xk(i)=sum(X);
 end
 end
